@@ -1,16 +1,9 @@
-# google_codelab
+# FLUTTER CODELAB 
 
-A new Flutter project.
+Projeto Codelab desenvolvido em Dart utilizando o Framework *Flutter*.
 
-## Getting Started
+Este projeto foi baseado no Google Codelab - Random WordPairs. 
 
-This project is a starting point for a Flutter application.
+![Flutter](https://github.com/WendlerTomicki/Flutter_Codelab/assets/99138229/d8f0a005-1726-44c8-9021-16475e1bdae7)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+O projeto consiste em gerar duas palavras aleatórias e uni-las em uma única palavra, tendo o usuário a opção de favorita-la ou gerar outro par de palavras.
