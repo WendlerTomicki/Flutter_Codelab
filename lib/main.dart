@@ -13,7 +13,8 @@ class FavoritesPage extends StatelessWidget {
 
     if (appState.favorites.isEmpty) {
       return Center(
-        child: Text('No favorites yet.'),
+        child: Text('No favorites yet.', style: TextStyle(fontSize: 20),),
+     
       );
     }
 
@@ -22,7 +23,7 @@ class FavoritesPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(20),
           child: Text('You have '
-              '${appState.favorites.length} favorites:'),
+              '${appState.favorites.length} favorites random words:'),
         ),
         for (var pair in appState.favorites)
           ListTile(
@@ -96,6 +97,12 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     return LayoutBuilder(builder: (context, constraints) {
       return Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.deepPurple,
+          title: Text('Codelab - Random Words'.toUpperCase()),
+          titleTextStyle: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 3, fontSize: 20),
+        ),
         body: Row(
           children: [
             SafeArea(
@@ -176,8 +183,6 @@ class GeneratorPage extends StatelessWidget {
   }
 }
 
-// ...
-
 class BigCard extends StatelessWidget {
   const BigCard({
     super.key,
@@ -193,16 +198,28 @@ class BigCard extends StatelessWidget {
         .copyWith(color: theme.colorScheme.onPrimary);
 
     return Card(
-      elevation: 5,
-      color: theme.colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Text(
-          pair.asLowerCase,
-          style: style,
-          semanticsLabel: "${pair.first} ${pair.second}",
-        ),
+  elevation: 5,
+  color: theme.colorScheme.primary,
+  child: Padding(
+    padding: const EdgeInsets.all(20),
+    child: Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(
+            text: pair.first,
+            style: style,
+          ),
+          TextSpan(
+            text: pair.second,
+            style: TextStyle(
+              fontWeight: FontWeight.bold, fontSize: 45, color: Colors.white
+            ),
+          ),
+        ],
       ),
-    );
-  }
+      semanticsLabel: "${pair.first} ${pair.second}",
+    ),
+  ),
+);
+}
 }
