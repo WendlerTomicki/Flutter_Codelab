@@ -13,8 +13,10 @@ class FavoritesPage extends StatelessWidget {
 
     if (appState.favorites.isEmpty) {
       return Center(
-        child: Text('No favorites yet.', style: TextStyle(fontSize: 20),),
-     
+        child: Text(
+          'No favorites yet.',
+          style: TextStyle(fontSize: 20),
+        ),
       );
     }
 
@@ -27,8 +29,14 @@ class FavoritesPage extends StatelessWidget {
         ),
         for (var pair in appState.favorites)
           ListTile(
-            leading: Icon(Icons.favorite),
             title: Text(pair.asLowerCase),
+            leading: IconButton(
+              icon: Icon(Icons.delete_outline),
+              color: const Color.fromARGB(255, 145, 23, 15),
+              onPressed: () {
+                appState.removeFavorite(pair);
+              },
+            ),
           ),
       ],
     );
@@ -72,6 +80,11 @@ class MyAppState extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void removeFavorite(WordPair pair) {
+    favorites.remove(pair);
+    notifyListeners();
+  }
 }
 
 class MyHomePage extends StatefulWidget {
@@ -101,7 +114,8 @@ class _MyHomePageState extends State<MyHomePage> {
           centerTitle: true,
           backgroundColor: Colors.deepPurple,
           title: Text('Codelab - Random Words'.toUpperCase()),
-          titleTextStyle: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 3, fontSize: 20),
+          titleTextStyle: TextStyle(
+              fontWeight: FontWeight.bold, letterSpacing: 3, fontSize: 20),
         ),
         body: Row(
           children: [
@@ -198,28 +212,29 @@ class BigCard extends StatelessWidget {
         .copyWith(color: theme.colorScheme.onPrimary);
 
     return Card(
-  elevation: 5,
-  color: theme.colorScheme.primary,
-  child: Padding(
-    padding: const EdgeInsets.all(20),
-    child: Text.rich(
-      TextSpan(
-        children: [
+      elevation: 5,
+      color: theme.colorScheme.primary,
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Text.rich(
           TextSpan(
-            text: pair.first,
-            style: style,
+            children: [
+              TextSpan(
+                text: pair.first,
+                style: style,
+              ),
+              TextSpan(
+                text: pair.second,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 45,
+                    color: Colors.white),
+              ),
+            ],
           ),
-          TextSpan(
-            text: pair.second,
-            style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 45, color: Colors.white
-            ),
-          ),
-        ],
+          semanticsLabel: "${pair.first} ${pair.second}",
+        ),
       ),
-      semanticsLabel: "${pair.first} ${pair.second}",
-    ),
-  ),
-);
-}
+    );
+  }
 }
